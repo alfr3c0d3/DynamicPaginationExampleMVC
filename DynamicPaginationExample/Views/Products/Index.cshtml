@@ -1,0 +1,46 @@
+﻿@model IEnumerable<DynamicPaginationExample.Models.Product>
+
+@{
+    ViewData["Title"] = "Products";
+
+    var totalPages = ViewBag.PageCount;
+}
+
+<style>
+    .grid {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+    }
+
+        .grid:after {
+            content: "";
+            flex: auto;
+        }
+
+    .grid-child {
+        padding: 15px;
+        width: 25%;
+        box-sizing: border-box;
+    }
+</style>
+
+<h2>Products</h2>
+<div class="grid row">
+    @foreach (var item in Model)
+    {
+        <div class="grid-child">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">@item.Description</h5>
+                    <p>$@item.Price</p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@Html.HiddenFor(m => totalPages, new { id = "total-pages" })
+
+<ul id="pagination-demo" class="pagination-md"></ul>
+
